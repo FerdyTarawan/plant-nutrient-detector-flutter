@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class CardList extends StatelessWidget {
+  final Auth auth = new Auth();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -18,7 +19,7 @@ class CardList extends StatelessWidget {
         switch (snapshot.connectionState) {
           default:
             return ListView(
-              children: snapshot.data.documents.map((doc){
+              children: snapshot.data.documents.where((doc)=> doc.data['userID']==auth.getCurrentUser()).map((doc){
                 String res = doc.data['detectionResult'];
                 String path = doc.data['imagePath'];
                 Timestamp timestamp = doc.data['date'];
