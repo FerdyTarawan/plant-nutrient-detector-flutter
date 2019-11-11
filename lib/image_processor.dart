@@ -68,7 +68,7 @@ class _ImageProcessorState extends State<ImageProcessor> {
   }
 
   Future<String> _detectImage(File img) async{
-    final String apiEndpoint = "http://35.247.145.169/predict";
+    final String apiEndpoint = "http://34.87.124.241/predict";
     FormData formData = new FormData();
     formData.add("image", UploadFileInfo(_imageFile,basename(_imageFile.path)));
 
