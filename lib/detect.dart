@@ -9,6 +9,7 @@ import 'dart:io';
 
 class CardList extends StatelessWidget {
   final Auth auth = new Auth();
+  String currUid;
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -18,8 +19,13 @@ class CardList extends StatelessWidget {
           return Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
           default:
+            auth.getCurrentUserID().then((id)=>{this.currUid = id});
             return ListView(
-              children: snapshot.data.documents.where((doc)=> doc.data['userID']==auth.getCurrentUser()).map((doc){
+              children: snapshot.data.documents.where((doc)=>doc.data['userID'] == this.currUid).map((doc){
+                print("test ");
+                print(doc.data['userID']);
+                print(this.currUid);
+                print(doc.data['userID'] == this.currUid);
                 String res = doc.data['detectionResult'];
                 String path = doc.data['imagePath'];
                 Timestamp timestamp = doc.data['date'];
