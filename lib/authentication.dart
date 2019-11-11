@@ -18,6 +18,11 @@ class Auth {
     FirebaseUser user = await _auth.currentUser();
     return user;
   }
+  
+  Future<String> getCurrentUserID() async {
+    FirebaseUser user = await _auth.currentUser();
+    return user.uid;
+  }
  
   Future<String> register(String email, String password) async {
     AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
